@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+</head>
+<body>
+<ul id="myList">
+</ul>
+	<script>
+		fetch('https://api.github.com/users/octocat')
+		.then((response) => response.json())
+		.then(function(data){
+			for(key in data){
+				let li= createNode("li"); // creating element
+				var textnode = document.createTextNode(key+" : \t" +data[key]); //data to insert in each li
+				append(li,textnode); //appending data
+				var parent =  document.getElementById("myList");
+				append(parent,li );
+			}
+
+		})
+		.catch(function(error){
+			ul.innerHTML ="unable to fetch authors";
+		})
+		
+		//function for creating element
+		function createNode(element){
+			return document.createElement(element);
+		}
+		
+		//function to append elements
+		function append(parent,el){
+			return parent.appendChild(el);
+		}
+	</script>
+	
+</body>
+</html>
